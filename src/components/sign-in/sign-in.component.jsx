@@ -9,6 +9,7 @@ import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 // Styles
 import './sign-in.styles.scss';
+import { SignInContainer, ButtonsContainer } from './sign-in.styles';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -23,13 +24,13 @@ class SignIn extends React.Component {
     handleSubmit = async event => {
         event.preventDefault();
 
-        const {email, password} = this.state;
+        const { email, password } = this.state;
 
-        try{
-            await auth.signInWithEmailAndPassword(email,password);
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
 
             this.setState({ email: '', password: '' })
-        } catch(err) {
+        } catch (err) {
             console.error(err);
         }
     }
@@ -42,7 +43,7 @@ class SignIn extends React.Component {
 
     render() {
         return (
-            <div className='sign-in'>
+            <SignInContainer>
                 <h2>
                     I already have an account
                 </h2>
@@ -66,16 +67,16 @@ class SignIn extends React.Component {
                         required
                     />
 
-                    <div className='buttons'>
+                    <ButtonsContainer>
                         <CustomButton type='submit' value='Submit forms'>
                             SIGN IN
                         </CustomButton>
                         <CustomButton onClick={signInWithGoogle} value='Submit forms' isGoogleSignIn>
                             SIGN IN WITH GOOGLE
                         </CustomButton>
-                    </div>
+                    </ButtonsContainer>
                 </form>
-            </div>
+            </SignInContainer>
         )
     }
 }
