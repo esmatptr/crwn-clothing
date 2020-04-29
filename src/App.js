@@ -18,7 +18,7 @@ import { auth, createUserProfileDocument, addCollectionAndDocuments } from './fi
 
 
 // Redux
-import { setCurrentUser } from './redux/user/user.actions';
+import { setCurrentUser, checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
@@ -26,8 +26,8 @@ class App extends React.Component {
   unsubscribeFromAuth = null
 
   componentDidMount() {
-    const { setCurrentUser, collectionSArray } = this.props;
-
+    const { checkUserSession } = this.props;
+    checkUserSession()
 
 
     // Old
@@ -79,7 +79,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
+  checkUserSession: () => dispatch(checkUserSession())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
